@@ -40,6 +40,10 @@ h1 {
     border-color: #333;
 }
 
+.character-icon.selected {
+    border-color: #333;
+}
+
 .profile {
     margin-top: 20px;
 }
@@ -56,8 +60,30 @@ h1 {
     border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
-    height: 200px;
+    height: 400px;
     overflow-y: auto;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.message.character1 {
+    background-color: #d1e7fd;
+    align-self: flex-start;
+}
+
+.message.character2 {
+    background-color: #fdd1d1;
+    align-self: flex-end;
 }
 
 #userInput {

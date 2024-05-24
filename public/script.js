@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     let selectedCharacter1 = null;
     let selectedCharacter2 = null;
+    let conversation = [];
 
     fetch('./character_profiles.json')
         .then(response => response.json())
@@ -27,12 +28,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     selectedCharacter1 = character;
                     document.getElementById('characterIcons1').querySelectorAll('.character-icon').forEach(icon => icon.classList.remove('selected'));
                     icon1.classList.add('selected');
+                    document.getElementById('nextResponse1').textContent = `Get Next Response from ${character["Character Name"]}`;
                 });
                 
                 icon2.addEventListener('click', function() {
                     selectedCharacter2 = character;
                     document.getElementById('characterIcons2').querySelectorAll('.character-icon').forEach(icon => icon.classList.remove('selected'));
                     icon2.classList.add('selected');
+                    document.getElementById('nextResponse2').textContent = `Get Next Response from ${character["Character Name"]}`;
                 });
 
                 characterIcons1.appendChild(icon1);
@@ -50,41 +53,71 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Clear previous messages
         messages.innerHTML = '';
+        conversation = [`Debate Topic: ${debateTopic}`];
 
-        // Send debate topic and selected characters to backend
+        // Indicate that the debate has started
         fetch('/api/startDebate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                topic: debateTopic,
-                character1: selectedCharacter1["Character Name"],
-                character2: selectedCharacter2["Character Name"]
+                topic: debateTopic
             })
         })
         .then(response => response.json())
         .then(data => {
-            let delay = 0;
-            const delayIncrement = 2000; // 2 seconds delay between messages
+            const startMessage = document.createElement('div');
+            startMessage.textContent = 'Debate started. You can now request responses from the characters.';
+            startMessage.classList.add('message');
+            messages.appendChild(startMessage);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 
-            data.debate.forEach((message, index) => {
-                delay += delayIncrement;
-                setTimeout(() => {
-                    const debateMessage = document.createElement('div');
-                    debateMessage.textContent = `${message.character}: ${message.text}`;
-                    debateMessage.classList.add('message');
-                    if (index % 2 === 0) {
-                        debateMessage.classList.add('character1');
-                    } else {
-                        debateMessage.classList.add('character2');
-                    }
-                    messages.appendChild(debateMessage);
+    window.getNextResponse = function(characterNumber) {
+        if (!conversation.length || !selectedCharacter1 || !selectedCharacter2) {
+            return;
+        }
 
-                    // Scroll to the bottom
-                    messages.scrollTop = messages.scrollHeight;
-                }, delay);
-            });
+        const character = characterNumber === 1 ? selectedCharacter1["Character Name"] : selectedCharacter2["Character Name"];
+        const conversationHistory = conversation.join('\n');
+
+        fetch('/api/getResponse', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                character: character,
+                conversation: conversationHistory
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const characterName = document.createElement('div');
+            characterName.textContent = data.character;
+            characterName.classList.add('character-name');
+            
+            const debateMessage = document.createElement('div');
+            debateMessage.textContent = data.text;
+            debateMessage.classList.add('message');
+            if (data.character === selectedCharacter1["Character Name"]) {
+                debateMessage.classList.add('character1');
+            } else {
+                debateMessage.classList.add('character2');
+            }
+            
+            document.getElementById('messages').appendChild(characterName);
+            document.getElementById('messages').appendChild(debateMessage);
+
+            // Update conversation history
+            conversation.push(`${data.character}: ${data.text}`);
+
+            // Scroll to the bottom
+            document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
         })
         .catch(error => {
             console.error('Error:', error);

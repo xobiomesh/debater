@@ -10,11 +10,11 @@
     <div class="container">
         <h1>Historical Figures Debate</h1>
         <div id="characterIcons1" class="character-icons">
-            <h2>Select Character 1</h2>
+            <h2>Select Figure 1</h2>
             <!-- Icons will be added here dynamically -->
         </div>
         <div id="characterIcons2" class="character-icons">
-            <h2>Select Character 2</h2>
+            <h2>Select Figure 2</h2>
             <!-- Icons will be added here dynamically -->
         </div>
         <div id="debateTopic">
@@ -25,6 +25,10 @@
         <div id="debate" class="debate">
             <h2>Debate</h2>
             <div id="messages" class="messages"></div>
+            <div class="controls">
+                <button id="nextResponse1" onclick="getNextResponse(1)">Get Next Response from Character 1</button>
+                <button id="nextResponse2" onclick="getNextResponse(2)">Get Next Response from Character 2</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

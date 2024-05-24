@@ -12,13 +12,11 @@ const groq = new Groq({
 const app = express();
 const port = 3000;
 
-// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(bodyParser.json());
 
-async function getGroqChatCompletion(character, message) {
-    const prompt = `You are ${character}. Answer the following question as if you were ${character}:\n\n${message}`;
+async function getGroqChatCompletion(character, conversation) {
+    const prompt = `You are ${character}. Continue the following conversation without repeating your name in the response:\n\n${conversation}`;
     return groq.chat.completions.create({
         messages: [
             {
@@ -30,32 +28,19 @@ async function getGroqChatCompletion(character, message) {
     });
 }
 
-app.post("/api/startDebate", async (req, res) => {
-    const { topic, character1, character2 } = req.body;
+app.post("/api/startDebate", (req, res) => {
+    res.json({ message: 'Debate started. You can now request responses from the characters.' });
+});
+
+app.post("/api/getResponse", async (req, res) => {
+    const { character, conversation } = req.body;
 
     try {
-        const messages = [];
-
-        // Generate initial responses for both characters
-        const response1 = await getGroqChatCompletion(character1, topic);
-        const response2 = await getGroqChatCompletion(character2, topic);
-
-        messages.push({ character: character1, text: response1.choices[0]?.message?.content || "" });
-        messages.push({ character: character2, text: response2.choices[0]?.message?.content || "" });
-
-        // Simulate back-and-forth debate
-        for (let i = 0; i < 2; i++) { // Adjust the number of turns as needed
-            const response1 = await getGroqChatCompletion(character1, messages[messages.length - 1].text);
-            messages.push({ character: character1, text: response1.choices[0]?.message?.content || "" });
-
-            const response2 = await getGroqChatCompletion(character2, messages[messages.length - 1].text);
-            messages.push({ character: character2, text: response2.choices[0]?.message?.content || "" });
-        }
-
-        res.json({ debate: messages });
+        const response = await getGroqChatCompletion(character, conversation);
+        res.json({ character, text: response.choices[0]?.message?.content || "" });
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error generating debate');
+        res.status(500).send('Error generating response');
     }
 });
 
