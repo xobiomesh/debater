@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historical Figures Debate</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Historical Figures Debate</h1>
+        <div id="characterIcons1" class="character-icons">
+            <h2>Select Character 1</h2>
+            <!-- Icons will be added here dynamically -->
+        </div>
+        <div id="characterIcons2" class="character-icons">
+            <h2>Select Character 2</h2>
+            <!-- Icons will be added here dynamically -->
+        </div>
+        <div id="debateTopic">
+            <h2>Debate Topic</h2>
+            <input type="text" id="debateInput" placeholder="Enter debate topic...">
+            <button onclick="startDebate()">Start Debate</button>
+        </div>
+        <div id="debate" class="debate">
+            <h2>Debate</h2>
+            <div id="messages" class="messages"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
