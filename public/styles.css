@@ -68,12 +68,16 @@ h1 {
     flex-direction: column;
 }
 
+/* Existing styles */
+
 .message {
     margin: 10px 0;
     padding: 10px;
     border-radius: 10px;
     max-width: 80%;
     word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
 }
 
 .message.character1 {
@@ -84,6 +88,15 @@ h1 {
 .message.character2 {
     background-color: #fdd1d1;
     align-self: flex-end;
+}
+
+.character-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.message-text {
+    margin-top: 5px;
 }
 
 #userInput {

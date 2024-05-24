@@ -97,20 +97,25 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(response => response.json())
         .then(data => {
-            const characterName = document.createElement('div');
-            characterName.textContent = data.character;
-            characterName.classList.add('character-name');
-            
             const debateMessage = document.createElement('div');
-            debateMessage.textContent = data.text;
             debateMessage.classList.add('message');
             if (data.character === selectedCharacter1["Character Name"]) {
                 debateMessage.classList.add('character1');
             } else {
                 debateMessage.classList.add('character2');
             }
+
+            const characterName = document.createElement('div');
+            characterName.textContent = data.character;
+            characterName.classList.add('character-name');
             
-            document.getElementById('messages').appendChild(characterName);
+            const messageText = document.createElement('div');
+            messageText.textContent = data.text;
+            messageText.classList.add('message-text');
+            
+            debateMessage.appendChild(characterName);
+            debateMessage.appendChild(messageText);
+            
             document.getElementById('messages').appendChild(debateMessage);
 
             // Update conversation history
