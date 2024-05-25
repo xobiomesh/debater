@@ -10,6 +10,9 @@
 #|____/ \___|_.__/ \__,_|\__\___|_|           #
 ###############################################
 
+This app run using llama 8B model with inference from the Groq api
+Visit groq.com for more info
+
 To run locally:
 1. Install Node.js
 

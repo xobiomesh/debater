@@ -1,18 +1,26 @@
 document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM fully loaded and parsed");
+
     let selectedCharacter1 = null;
     let selectedCharacter2 = null;
     let conversation = [];
 
-    fetch('./character_profiles.json')
-        .then(response => response.json())
+    fetch('/character_profiles.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log("Character profiles loaded:", data);
             const characterIcons1 = document.getElementById('characterIcons1');
             const characterIcons2 = document.getElementById('characterIcons2');
 
             data.forEach((character, index) => {
                 const icon1 = document.createElement('img');
                 const icon2 = document.createElement('img');
-                const characterName = character["Character Name"].toLowerCase().replace(' ', '_');
+                const characterName = character["Character Name"].toLowerCase().replace(/ /g, '_');
                 
                 icon1.src = `images/${characterName}.png`;
                 icon1.alt = character["Character Name"];
@@ -25,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 icon2.dataset.index = index;
                 
                 icon1.addEventListener('click', function() {
+                    console.log(`Character 1 selected: ${character["Character Name"]}`);
                     selectedCharacter1 = character;
                     document.getElementById('characterIcons1').querySelectorAll('.character-icon').forEach(icon => icon.classList.remove('selected'));
                     icon1.classList.add('selected');
@@ -32,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
                 
                 icon2.addEventListener('click', function() {
+                    console.log(`Character 2 selected: ${character["Character Name"]}`);
                     selectedCharacter2 = character;
                     document.getElementById('characterIcons2').querySelectorAll('.character-icon').forEach(icon => icon.classList.remove('selected'));
                     icon2.classList.add('selected');
@@ -41,13 +51,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 characterIcons1.appendChild(icon1);
                 characterIcons2.appendChild(icon2);
             });
+        })
+        .catch(error => {
+            console.error('Error fetching character profiles:', error);
         });
 
     window.startDebate = function() {
+        console.log("startDebate function called");
+
         const debateTopic = document.getElementById('debateInput').value;
         const messages = document.getElementById('messages');
 
         if (!debateTopic.trim() || !selectedCharacter1 || !selectedCharacter2) {
+            console.warn("Debate topic or characters not selected");
             return;
         }
 
@@ -65,7 +81,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 topic: debateTopic
             })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             const startMessage = document.createElement('div');
             startMessage.textContent = 'Debate started. You can now request responses from the characters.';
@@ -73,12 +94,15 @@ document.addEventListener("DOMContentLoaded", function() {
             messages.appendChild(startMessage);
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Error starting debate:', error);
         });
-    }
+    };
 
     window.getNextResponse = function(characterNumber) {
+        console.log(`getNextResponse function called for character ${characterNumber}`);
+
         if (!conversation.length || !selectedCharacter1 || !selectedCharacter2) {
+            console.warn("No conversation or characters not selected");
             return;
         }
 
@@ -95,7 +119,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 conversation: conversationHistory
             })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             const debateMessage = document.createElement('div');
             debateMessage.classList.add('message');
@@ -108,14 +137,14 @@ document.addEventListener("DOMContentLoaded", function() {
             const characterName = document.createElement('div');
             characterName.textContent = data.character;
             characterName.classList.add('character-name');
-            
+
             const messageText = document.createElement('div');
             messageText.textContent = data.text;
             messageText.classList.add('message-text');
-            
+
             debateMessage.appendChild(characterName);
             debateMessage.appendChild(messageText);
-            
+
             document.getElementById('messages').appendChild(debateMessage);
 
             // Update conversation history
@@ -125,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Error getting next response:', error);
         });
-    }
+    };
 });
