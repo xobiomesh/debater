@@ -20,8 +20,12 @@ npm install express body-parser grok-sdk dotenv express-basic-auth
 Then run:
 node server.js
 
+open http://localhost:3000 in browser
 
-To serve online install use ngrok
-
-and run
+To serve online install and use ngrok
+and run:
 ngrok http 3000
+
+open https link provided in the console in your favourite browser
+```
+
