@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 // Configure basic authentication
 app.use(basicAuth({
-    users: { 'admin': 'password' }, // Replace with your desired username and password
+    users: { 'thegreat': 'debater' }, // Replace with your desired username and password
     challenge: true
 }));
 

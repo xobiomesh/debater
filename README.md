@@ -27,5 +27,8 @@ and run:
 ngrok http 3000
 
 open https link provided in the console in your favourite browser
-```
+
+Default login is admin:thegreat & password:debater
+To change from default password serch 'Configure basic authentication'
+in server.js file and modify accordingly
 
