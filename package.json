@@ -10,11 +10,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "are-we-there-yet": "^4.0.2",
     "body-parser": "^1.20.2",
+    "debug": "^4.3.4",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-basic-auth": "^1.2.1",
-    "groq-sdk": "^0.4.0"
+    "gauge": "^5.0.2",
+    "groq-sdk": "^0.4.0",
+    "inflight": "^1.0.6",
+    "npmlog": "^7.0.1",
+    "punycode": "^2.3.1",
+    "uuid": "^9.0.1"
   },
   "description": ""
 }
