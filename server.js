@@ -1,19 +1,35 @@
 "use strict";
 require('dotenv').config();
+
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const Groq = require("groq-sdk");
+const basicAuth = require("express-basic-auth");
 
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY
 });
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Middleware to set the ngrok-skip-browser-warning header
+app.use((req, res, next) => {
+    res.setHeader('ngrok-skip-browser-warning', 'true');
+    next();
+});
+
+// Configure basic authentication
+app.use(basicAuth({
+    users: { 'admin': 'password' }, // Replace with your desired username and password
+    challenge: true
+}));
+
 app.use(bodyParser.json());
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 async function getGroqChatCompletion(character, conversation) {
     const prompt = `You are ${character}. Continue the following conversation without repeating your name in the response:\n\n${conversation}`;
@@ -44,6 +60,10 @@ app.post("/api/getResponse", async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+app.get('/', (req, res) => {
+    res.send('Hello, world!');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
