@@ -7,6 +7,11 @@ const bodyParser = require("body-parser");
 const Groq = require("groq-sdk");
 const basicAuth = require("express-basic-auth");
 
+// Import the analytics module and inject it into the app
+import { inject } from '@vercel/analytics'; 
+inject();
+
+
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY
 });
