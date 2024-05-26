@@ -8,6 +8,7 @@ Possible additions:
 * Have the responses stream instead of appearing as a block
 * Give user the possibility to take part in the conversation as well
 * Enhance getResponse.js to make the prompt fit the character and give more description about its background and state of mind.
+* reorganise the layout to have character one selection options on the left and character 2 on the right of the dialogue box
 
 DONE 
 
