@@ -3,8 +3,8 @@ const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY
 });
 
-async function getGroqChatCompletion(character, conversation) {
-    const prompt = `You are ${character}. Continue the following conversation in french without repeating your name in the response:\n\n${conversation}`;
+async function getGroqChatCompletion(character, conversation, language) {
+    const prompt = `You are ${character}. Continue the following conversation in ${language} without repeating your name in the response:\n\n${conversation}`;
     try {
         const response = await groq.chat.completions.create({
             messages: [
@@ -24,9 +24,9 @@ async function getGroqChatCompletion(character, conversation) {
 
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
-        const { character, conversation } = req.body;
+        const { character, conversation, language} = req.body;
         try {
-            const responseText = await getGroqChatCompletion(character, conversation);
+            const responseText = await getGroqChatCompletion(character, conversation, language);
             res.status(200).json({ character, text: responseText });
         } catch (error) {
             res.status(500).send('Error generating response');

@@ -31,8 +31,8 @@ app.use(bodyParser.json());
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-async function getGroqChatCompletion(character, conversation) {
-    const prompt = `You are ${character}. Continue the following conversation without repeating your name in the response:\n\n${conversation}`;
+async function getGroqChatCompletion(character, conversation, language) {
+    const prompt = `You are ${character}. Continue the following conversation in ${language} without repeating your name in the response:\n\n${conversation}`;
     return groq.chat.completions.create({
         messages: [
             {
@@ -49,10 +49,10 @@ app.post("/api/startDebate", (req, res) => {
 });
 
 app.post("/api/getResponse", async (req, res) => {
-    const { character, conversation } = req.body;
+    const { character, conversation, language } = req.body;
 
     try {
-        const response = await getGroqChatCompletion(character, conversation);
+        const response = await getGroqChatCompletion(character, conversation, language);
         res.json({ character, text: response.choices[0]?.message?.content || "" });
     } catch (error) {
         console.error(error);

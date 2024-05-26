@@ -1,9 +1,3 @@
-/*
-// Import the analytics module and inject it into the app
-import { inject } from '@vercel/analytics'; 
-inject();
-*/
-
 document.addEventListener("DOMContentLoaded", function() {
     console.log("DOM fully loaded and parsed");
 
@@ -114,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const character = characterNumber === 1 ? selectedCharacter1["Character Name"] : selectedCharacter2["Character Name"];
         const conversationHistory = conversation.join('\n');
+        const language = document.getElementById('language').value;  // Get selected language
 
         fetch('/api/getResponse', {
             method: 'POST',
@@ -122,7 +117,8 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             body: JSON.stringify({
                 character: character,
-                conversation: conversationHistory
+                conversation: conversationHistory,
+                language: language  // Include language in the request payload
             })
         })
         .then(response => {
