@@ -1,37 +1,43 @@
-###############################################
-# _____ _             ____                _   #
-#|_   _| |__   ___   / ___|_ __ ___  __ _| |_ #
-#  | | | '_ \ / _ \ | |  _| '__/ _ \/ _` | __|#
-#  | | | | | |  __/ | |_| | | |  __/ (_| | |_ #
-# _|_| |_| |_|\___|  \____|_|  \___|\__,_|\__|#
-#|  _ \  ___| |__   __ _| |_ ___ _ __         #
-#| | | |/ _ \ '_ \ / _` | __/ _ \ '__|        #
-#| |_| |  __/ |_) | (_| | ||  __/ |           #
-#|____/ \___|_.__/ \__,_|\__\___|_|           #
-###############################################
 
-This app run using llama 8B model with inference from the Groq api
-Visit groq.com for more info
+# 💬 The Great Debate 💬
 
-To run locally:
-1. Install Node.js
+This app runs using the llama 8B model with inference from the Groq API. Visit [groq.com](https://www.groq.com) for more info.
 
-install dependencies:
-npm install express body-parser grok-sdk dotenv express-basic-auth
+## 🚀 Running Locally
 
+### 1. Install Node.js
 
-Then run:
+### 2. Install Dependencies
+```bash
+npm install express body-parser groq-sdk dotenv express-basic-auth
+```
+
+### 3. Run the Server
+```bash
 node server.js
+```
 
-open http://localhost:3000 in browser
+### 4. Open in Browser
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-To serve online install and use ngrok
-and run:
+## 🌐 Serving Online
+
+To serve the app online, install and use `ngrok`:
+
+### 1. Run ngrok
+```bash
 ngrok http 3000
+```
 
-open https link provided in the console in your favourite browser
+### 2. Open the provided HTTPS link in your favorite browser.
 
-Default login is admin:thegreat & password:debater
-To change from default password serch 'Configure basic authentication'
-in server.js file and modify accordingly
+## 🔐 Default Login
 
+- **Username:** thegreat
+- **Password:** debater
+
+To change the default password, search for 'Configure basic authentication' in the `server.js` file and modify accordingly.
+
+---
+
+✨ **Happy Debating!** ✨
