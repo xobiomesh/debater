@@ -1,6 +1,8 @@
+/*
 // Import the analytics module and inject it into the app
 import { inject } from '@vercel/analytics'; 
 inject();
+*/
 
 document.addEventListener("DOMContentLoaded", function() {
     console.log("DOM fully loaded and parsed");
