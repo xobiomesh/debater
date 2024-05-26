@@ -29,7 +29,14 @@ app.use(basicAuth({
 app.use(bodyParser.json());
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+app.get('/character_profiles.json', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'character_profiles.json'));
+});
 
 async function getGroqChatCompletion(character, conversation, language) {
     const prompt = `You are ${character}. Continue the following conversation in ${language} without repeating your name in the response:\n\n${conversation}`;
@@ -60,9 +67,7 @@ app.post("/api/getResponse", async (req, res) => {
     }
 });
 
-app.get('/', (req, res) => {
-    res.send('Hello, world!');
-});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
