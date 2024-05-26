@@ -34,7 +34,7 @@ ngrok http 3000
 ## 🔐 Default Login
 
 - **Username:** thegreat
-- **Password:** debater
+- **Password:** debate
 
 To change the default password, search for 'Configure basic authentication' in the `server.js` file and modify accordingly.
 
