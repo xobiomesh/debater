@@ -7,3 +7,4 @@ Possible additions:
 * Add character names below their respective icons
 * Enable the user to choose how many exchanges happen automatically
 * Have the responses stream instead of appearing as a block
+* Give user the possibility to take part in the conversation as well
