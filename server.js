@@ -12,7 +12,7 @@ const groq = new Groq({
 });
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5500;
 
 // Middleware to set the ngrok-skip-browser-warning header
 app.use((req, res, next) => {
@@ -47,7 +47,7 @@ async function getGroqChatCompletion(character, conversation, language) {
                 content: prompt
             }
         ],
-        model: "llama3-8b-8192"
+        model: "llama3-70b-8192"
     });
 }
 

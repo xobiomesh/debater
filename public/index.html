@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Debate Machine</h1>
+    <div class="character-icons-container left">
         <div id="characterIcons1" class="character-icons">
-            <h2>Select Figure 1</h2>
-            <!-- Icons will be added here dynamically -->
+             <!-- Icons will be added here dynamically -->
         </div>
-        <div id="characterIcons2" class="character-icons">
-            <h2>Select Figure 2</h2>
-            <!-- Icons will be added here dynamically -->
+        <div class="controls">
+            <button id="nextResponse1" onclick="getNextResponse(1)">Select Debater</button>
         </div>
+    </div>
+    <div class="container">
+        <h2>Debate Machine</h2>
         <div id="languageSelection">
-            <h2>Language</h2>
+            <h3>Language</h3>
             <select id="language" title="Select Language">
                 <option value="English">English</option>
                 <option value="Spanish">Spanish</option>
@@ -26,20 +26,22 @@
                 <!-- Add more languages as needed -->
             </select>
         </div>
-        <div 
-        id="debateTopic">
-            <h2>Debate Topic</h2>
+        <div id="debateTopic">
+            <h3>Debate Topic</h3>
             <input type="text" id="debateInput" placeholder="Enter debate topic...">
             <button onclick="startDebate()">Start Debate</button>
-            <div class="controls">
-                <button id="nextResponse1" onclick="getNextResponse(1)">Get Next Response from Character 1</button>
-                <button id="nextResponse2" onclick="getNextResponse(2)">Get Next Response from Character 2</button>
-            </div>
-        </div>
+       </div>
         <div id="debate" class="debate">
-            <h2>Debate</h2>
+            <h3>Debate</h3>
             <div id="messages" class="messages"></div>
-            
+        </div>
+    </div>
+    <div class="character-icons-container right">
+        <div id="characterIcons2" class="character-icons">
+             <!-- Icons will be added here dynamically -->
+        </div>
+        <div class="controls">
+            <button id="nextResponse2" onclick="getNextResponse(2)">Select Debater</button>
         </div>
     </div>
     <script src="script.js"></script>
@@ -50,6 +52,6 @@
     <script>
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
-    <script defer src="/_vercel/speed-insights/script.js"></script> 
+    <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     selectedCharacter1 = character;
                     document.getElementById('characterIcons1').querySelectorAll('.character-icon').forEach(icon => icon.classList.remove('selected'));
                     icon1.classList.add('selected');
-                    document.getElementById('nextResponse1').textContent = `Get Next Response from ${character["Character Name"]}`;
+                    document.getElementById('nextResponse1').textContent = `Response from ${character["Character Name"]}`;
                 });
                 
                 icon2.addEventListener('click', function() {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     selectedCharacter2 = character;
                     document.getElementById('characterIcons2').querySelectorAll('.character-icon').forEach(icon => icon.classList.remove('selected'));
                     icon2.classList.add('selected');
-                    document.getElementById('nextResponse2').textContent = `Get Next Response from ${character["Character Name"]}`;
+                    document.getElementById('nextResponse2').textContent = `Response from ${character["Character Name"]}`;
                 });
 
                 characterIcons1.appendChild(icon1);

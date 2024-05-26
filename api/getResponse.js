@@ -13,7 +13,7 @@ async function getGroqChatCompletion(character, conversation, language) {
                     content: prompt
                 }
             ],
-            model: "llama3-8b-8192"
+            model: "llama3-70b-8192"
         });
         return response.choices[0]?.message?.content || "";
     } catch (error) {

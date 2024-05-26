@@ -6,6 +6,29 @@ body {
     padding: 0;
 }
 
+.character-icons-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 150px; /* Base width */
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+}
+
+.character-icons-container.left {
+    left: 0;
+}
+
+.character-icons-container.right {
+    right: 0;
+}
+
 .container {
     max-width: 1200px; /* Increased max-width to accommodate more icons */
     margin: 50px auto;
@@ -14,6 +37,8 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
     border: 1px solid #ddd;
+    margin-left: 170px; /* Adjust margin to make space for the fixed icons */
+    margin-right: 170px; /* Adjust margin to make space for the fixed icons */
 }
 
 h1 {
@@ -23,7 +48,7 @@ h1 {
 
 .character-icons {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: 1fr;
     gap: 20px;
     justify-content: center;
     margin: 20px 0;
@@ -113,6 +138,8 @@ button {
 @media (max-width: 1200px) {
     .container {
         max-width: 800px; /* Adjust max-width for smaller screens */
+        margin-left: 150px; /* Adjust margin to make space for the fixed icons */
+        margin-right: 150px; /* Adjust margin to make space for the fixed icons */
     }
 
     .character-icons {
@@ -121,8 +148,8 @@ button {
     }
 
     .character-icon {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
     }
 
     #messages {
@@ -142,6 +169,8 @@ button {
     .container {
         margin: 20px;
         padding: 10px;
+        margin-left: 130px; /* Adjust margin to make space for the fixed icons */
+        margin-right: 130px; /* Adjust margin to make space for the fixed icons */
     }
 
     .character-icons {
@@ -150,8 +179,8 @@ button {
     }
 
     .character-icon {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
     }
 
     #messages {
@@ -168,9 +197,16 @@ button {
 }
 
 @media (max-width: 480px) {
+    .character-icons-container {
+        width: 80px;
+        padding: 5px;
+    }
+
     .container {
         margin: 10px;
         padding: 5px;
+        margin-left: 100px; /* Adjust margin to make space for the fixed icons */
+        margin-right: 100px; /* Adjust margin to make space for the fixed icons */
     }
 
     .character-icons {
@@ -179,8 +215,8 @@ button {
     }
 
     .character-icon {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
     }
 
     #messages {
@@ -193,5 +229,41 @@ button {
 
     button {
         padding: 6px;
+    }
+}
+
+@media (max-width: 400px) {
+    .character-icons-container {
+        width: 60px;
+        padding: 5px;
+    }
+
+    .container {
+        margin: 10px;
+        padding: 5px;
+        margin-left: 80px; /* Adjust margin to make space for the fixed icons */
+        margin-right: 80px; /* Adjust margin to make space for the fixed icons */
+    }
+
+    .character-icons {
+        grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+        gap: 5px;
+    }
+
+    .character-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    #messages {
+        height: 150px;
+    }
+
+    #userInput {
+        width: calc(100% - 40px);
+    }
+
+    button {
+        padding: 5px;
     }
 }
