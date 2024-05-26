@@ -4,7 +4,7 @@ const groq = new Groq({
 });
 
 async function getGroqChatCompletion(character, conversation) {
-    const prompt = `You are ${character}. Continue the following conversation without repeating your name in the response:\n\n${conversation}`;
+    const prompt = `You are ${character}. Continue the following conversation in french without repeating your name in the response:\n\n${conversation}`;
     try {
         const response = await groq.chat.completions.create({
             messages: [
