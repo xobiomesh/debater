@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             const startMessage = document.createElement('div');
-            startMessage.textContent = 'Debate started. You can now request responses from the characters.';
+            startMessage.textContent = `Debate started. Topic: ${debateTopic}. You can now request responses from the characters.`;
             startMessage.classList.add('message');
             messages.appendChild(startMessage);
         })
