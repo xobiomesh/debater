@@ -28,7 +28,12 @@ body {
 .character-icons-container.right {
     right: 0;
 }
-
+.debatetitle {
+    text-align: center;
+    color: #000000;
+    font-size: 30px;
+    margin-top: 20px;
+}
 .container {
     max-width: 1200px; /* Increased max-width to accommodate more icons */
     margin: 50px auto;
@@ -37,8 +42,8 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
     border: 1px solid #ddd;
-    margin-left: 170px; /* Adjust margin to make space for the fixed icons */
-    margin-right: 170px; /* Adjust margin to make space for the fixed icons */
+    margin-left: auto; /* Adjust margin to make space for the fixed icons */
+    margin-right: auto; /* Adjust margin to make space for the fixed icons */
 }
 
 h1 {
