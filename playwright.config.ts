@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const startWebServer = process.env.START_WEB_SERVER === 'true';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -29,14 +30,31 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
+  webServer: startWebServer
+      ? {
+          command: 'npm run startserver',
+          url: 'http://127.0.0.1:5500',
+          reuseExistingServer: !process.env.CI,
+        }
+      : undefined,
 
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'fastlocal',
+      use: { ...devices['Desktop Chrome'] },
+        /* Run your local dev server before starting the tests */
+      
+    }
+  
+  ],
+    
+    /*
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-/*
+
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
@@ -66,12 +84,4 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
-});
+  });
