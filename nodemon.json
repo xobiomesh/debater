@@ -1,0 +1,6 @@
+{
+    "watch": ["tests"],
+    "ext": "js,ts",
+    "exec": "npx playwright test"
+  }
+  
