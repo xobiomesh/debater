@@ -1,5 +1,7 @@
 Possible additions:
 
+* Change server port from 5500 to 3000
+* Autorun nodemon watch and playrights testing on startup. 
 * Have the user create a custom character and its mood from a list
 * Ability to change language
 * Have a different color for each character's dialog bubble
@@ -10,6 +12,7 @@ Possible additions:
 * Enhance getResponse.js to make the prompt fit the character and give more description about its background and state of mind.
 * reorganise the layout to have character one selection options on the left and character 2 on the right of the dialogue box
 * make app responsive to various displays
+
 
 DONE 
 
