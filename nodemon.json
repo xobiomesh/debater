@@ -1,6 +1,12 @@
 {
-    "watch": ["tests"],
-    "ext": "js,ts",
-    "exec": "npx playwright test"
+    "watch": ["tests","public"],
+    "ext": "js,ts,html,css,json",
+    "exec": "npx playwright test",
+    "restartable": "rs",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "signal": "SIGTERM",
+    "delay": "2500"
   }
   

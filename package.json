@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "startserver": "cross-env NODE_ENV=development node server.js",
     "test": "npx playwright test",
-    "test:watch": "nodemon",
-    "startwatch": "npm run test:watch"
+    "test:watch": "cross-env NODE_ENV=test nodemon --exec \"npx playwright test\"",
+    "startnodemon": "npm run test:watch"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.44.1",
-    "@types/node": "^20.12.12"
+    "@types/node": "^20.12.12",
+    "cross-env": "^7.0.3"
   }
 }
