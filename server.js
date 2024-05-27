@@ -38,19 +38,6 @@ app.get('/character_profiles.json', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'character_profiles.json'));
 });
 
-async function getGroqChatCompletion(character, conversation, language) {
-    const prompt = `You are ${character}. Continue the following conversation in ${language} without repeating your name in the response:\n\n${conversation}`;
-    return groq.chat.completions.create({
-        messages: [
-            {
-                role: "user",
-                content: prompt
-            }
-        ],
-        model: "llama3-70b-8192"
-    });
-}
-
 app.post("/api/startDebate", (req, res) => {
     res.json({ message: 'Debate started. You can now request responses from the characters.' });
 });
