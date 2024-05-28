@@ -33,7 +33,7 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'fastlocal',
+      name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
 /*
