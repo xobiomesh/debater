@@ -4,15 +4,9 @@
   "main": "index.js",
   "scripts": {
     "startserver": "cross-env NODE_ENV=development node server.js",
-    "alltests": "npx playwright test",
-    "localtests": "npx playwright test tests/debater_local_tests.spec.ts",
-    "remotetests": "npx playwright test tests/debater_vercel_remote_tests.spec.ts",
-    "test:watch_all": "cross-env NODE_ENV=test nodemon --exec \"npx playwright test\"",
-    "test:watch_local": "cross-env START_WEB_SERVER=true NODE_ENV=test nodemon --exec \"npx playwright test tests/debater_local_tests.spec.ts\"",
-    "test:watch_remote": "cross-env NODE_ENV=test nodemon --exec \"npx playwright test tests/debater_vercel_remote_tests.spec.ts\"",
-    "startlocaltests": "npm run test:watch_local",
-    "startremotetests": "npm run test:watch_remote",
-    "startalltests": "npm run test:watch_all"
+    "test": "npx playwright test",
+    "test:watch": "cross-env NODE_ENV=test nodemon --exec \"npx playwright test\"",
+    "startnodemon": "npm run test:watch"
   },
   "keywords": [],
   "author": "",
