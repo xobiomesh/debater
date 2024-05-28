@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const basicAuth = require("express-basic-auth");
 
 // Import the getGroqChatCompletion function
-const getGroqChatCompletion = require("/api/getResponse");
+const getGroqChatCompletion = require("./api/getResponse");
 
 const app = express();
 const PORT = process.env.PORT || 5500;
