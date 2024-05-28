@@ -4,12 +4,10 @@ require('dotenv').config();
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const Groq = require("groq-sdk");
 const basicAuth = require("express-basic-auth");
 
-const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY
-});
+// Import the getGroqChatCompletion function
+const getGroqChatCompletion = require("./api/getResponse");
 
 const app = express();
 const PORT = process.env.PORT || 5500;
@@ -46,15 +44,13 @@ app.post("/api/getResponse", async (req, res) => {
     const { character, conversation, language } = req.body;
 
     try {
-        const response = await getGroqChatCompletion(character, conversation, language);
-        res.json({ character, text: response.choices[0]?.message?.content || "" });
+        const responseText = await getGroqChatCompletion(character, conversation, language);
+        res.json({ character, text: responseText });
     } catch (error) {
         console.error(error);
         res.status(500).send('Error generating response');
     }
 });
-
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

@@ -22,17 +22,4 @@ async function getGroqChatCompletion(character, conversation, language) {
     }
 }
 
-module.exports = async (req, res) => {
-    if (req.method === 'POST') {
-        const { character, conversation, language} = req.body;
-        try {
-            const responseText = await getGroqChatCompletion(character, conversation, language);
-            res.status(200).json({ character, text: responseText });
-        } catch (error) {
-            res.status(500).send('Error generating response');
-        }
-    } else {
-        res.setHeader('Allow', ['POST']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
-};
+module.exports = getGroqChatCompletion;
